@@ -1,0 +1,39 @@
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - bin/**/*
+    - vendor/**/*
+    - db/schema.rb
+    - spec/support/matchers/have_attr_accessor.rb
+    - lib/tasks/cucumber.rake
+    - features/support/_circleci_formatter.rb
+    - spec/support/extensions/its.rb
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Rails:
+  Enabled: true
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
