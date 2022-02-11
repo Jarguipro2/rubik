@@ -1,0 +1,20 @@
+.container
+  = render "shared/breadcrumb"
+
+  %h1.page-header
+    = t(".title")
+    - edit_path = edit_agenda_path(token: @agenda.token, step: AgendaCreationProcess::STEP_COURSE_SELECTION)
+    = link_to edit_path, class: "btn btn-xs btn-primary" do
+      %i.glyphicon.glyphicon-pencil
+      = t(".edit")
+
+= form_for @agenda do |f|
+  = render "overview", f: f
+
+.container-fluid.schedules
+  - @schedules.each_slice(2).with_index do |schedules_slice, slice_index|
+    .row
+      - schedules_slice.each_with_index do |schedule, index|
+        .col-lg-6
+          = render schedule, index: schedule_page_index + index + slice_index * 2 + 1, cache: true
+= paginate @schedules, window: 2

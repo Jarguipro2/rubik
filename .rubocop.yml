@@ -1,0 +1,79 @@
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - bin/**/*
+    - vendor/**/*
+    - db/schema.rb
+    - spec/support/matchers/have_attr_accessor.rb
+    - lib/tasks/cucumber.rake
+    - features/support/_circleci_formatter.rb
+    - spec/support/extensions/its.rb
+
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - features/step_definitions/**/*
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Rails:
+  Enabled: true
+
+RSpec/AnyInstance:
+  Exclude:
+    - spec/controllers/agendas_controller_spec.rb
+    - spec/controllers/comments_controller_spec.rb
+    - spec/models/agenda_spec.rb
+
+RSpec/ExpectActual:
+  Exclude:
+    - spec/routing/application_routing_spec.rb
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/**/*.rake_spec.rb
+    - spec/routing/**/*_spec.rb
+    - spec/support/shared_examples/coerced_attr_accessor.rb
+
+RSpec/FilePath:
+  Exclude:
+    - spec/config/application.rb
+    - spec/config/initializers/maintenance_spec.rb
+
+RSpec/InstanceVariable:
+  Exclude:
+    - spec/lib/schedule_generator_test_case_spec.rb
+    - spec/helpers/google_services_helper_spec.rb
+    - spec/middlewares/maintenance_spec.rb
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/routing/application_routing_spec.rb
+    - spec/requests/sidekiq_auth_spec.rb
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Style/AsciiIdentifiers:
+  Exclude:
+    - features/step_definitions/**/*
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/IndentArray:
+  EnforcedStyle: consistent
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
