@@ -1,0 +1,94 @@
+.container
+  = render "shared/breadcrumb"
+  = render "shared/flash_messages"
+
+  - if @agenda.errors.any?
+    .alert.alert-danger{ role: "alert" }
+      - @agenda.errors.each do |_, error|
+        %span.glyphicon.glyphicon-exclamation-sign{ "aria-hidden" => true }
+        = error
+        %br
+
+  %h1.page-header= t(".title")
+
+-#= form_for [@academic_degree_term, @agenda] do |f|
+= form_for [@agenda] do |f|
+  -#- @agenda.filters.each do |_, filter|
+  -#  = hidden_field_tag filter.key, filter.value
+  = hidden_field_tag :step, step
+  = render "shared/overview", f: f
+
+  .container
+    %fieldset
+      %legend= f.label :courses
+      %p= t(".mandatory_courses_explication_html")
+
+      -#- @agenda.academic_degree_term_courses.each_with_index do |academic_degree_term_course, index|
+      -#  :ruby
+      -#    agenda_course = @agenda.courses.find do |course|
+      -#      course.academic_degree_term_course == academic_degree_term_course
+      -#    end
+      -#
+      -#  .course-checkbox-button.btn-group.btn-group-justified{ role: "group" }
+      -#    - unless agenda_course.nil?
+      -#      = hidden_field_tag "agenda[courses_attributes][#{index}][`id`]", agenda_course.id, id: nil
+      -#    = hidden_field_tag "agenda[courses_attributes][#{index}][academic_degree_term_course_id]",
+      -#      academic_degree_term_course.id, id: nil
+      -#    = hidden_field_tag "agenda[courses_attributes][#{index}][mandatory]", false, id: nil
+      -#    = hidden_field_tag "agenda[courses_attributes][#{index}][_destroy]", true, id: nil
+      -#
+      -#    = check_box_tag "agenda[courses_attributes][#{index}][_destroy]", false, agenda_course.present?,
+      -#      data: { "child-checkbox" => "agenda_courses_attributes_#{index}_mandatory" }
+      -#    = label_tag "agenda_courses_attributes_#{index}__destroy", class: "btn btn-default" do
+      -#      = academic_degree_term_course.code
+      -#
+      -#    = check_box_tag "agenda[courses_attributes][#{index}][mandatory]", true, agenda_course&.mandatory?
+      -#    = label_tag "agenda_courses_attributes_#{index}_mandatory", class: "btn btn-default" do
+      -#      %i.checked.fa.fa-lock
+      -#      %i.unchecked.fa.fa-unlock-alt
+
+      - @agenda.course_terms.each_with_index do |course_term, index|
+        - agenda_course = @agenda.courses.find { |course| course.course_term == course_term }
+
+        .course-checkbox-button.btn-group.btn-group-justified{ role: "group" }
+          - unless agenda_course.nil?
+            = hidden_field_tag "agenda[courses_attributes][#{index}][`id`]", agenda_course.id, id: nil
+          = hidden_field_tag "agenda[courses_attributes][#{index}][course_term_id]", course_term.id, id: nil
+          = hidden_field_tag "agenda[mandatory_course_terms][#{index}]", false, id: nil
+          = hidden_field_tag "agenda[courses_attributes][#{index}][_destroy]", true, id: nil
+
+          = check_box_tag "agenda[courses_attributes][#{index}][_destroy]", false, agenda_course.present?,
+            data: { "child-checkbox" => "agenda_courses_attributes_#{index}_mandatory" }
+          = label_tag "agenda_courses_attributes_#{index}__destroy", class: "btn btn-default" do
+            = course_term.course.code
+
+          = check_box_tag "agenda[courses_attributes][#{index}][mandatory]", true, agenda_course&.mandatory?
+          = label_tag "agenda_courses_attributes_#{index}_mandatory", class: "btn btn-default" do
+            %i.checked.fa.fa-lock
+            %i.unchecked.fa.fa-unlock-alt
+
+    .checkbox
+      = f.label :filter_groups do
+        = f.check_box :filter_groups
+        = t(".filter_groups")
+
+    %fieldset
+      %legend= f.label :courses_per_schedule
+      .btn-group.courses-per-schedule-group.btn-group-justified
+        = f.collection_radio_buttons :courses_per_schedule, Agenda::COURSES_PER_SCHEDULE_RANGE, :to_i, :to_i do |ff|
+          = ff.radio_button
+          = ff.label(class: "btn btn-default")
+
+    %a.schedules-anchor{ name: "leaves" }
+    %fieldset.form-horizontal
+      %legend= f.label :leaves
+      = f.nested_form :leaves
+      = f.create_button :leaves, "+", class: "btn btn-default col-xs-12 col-sm-4 pull-right"
+
+    .row
+      .col-sm-4.col-sm-push-8
+        = f.submit class: "btn btn-primary btn-block"
+      .col-sm-8.col-sm-pull-4.back
+        = link_to edit_agenda_path(@agenda, step: :filter_selection) do
+          %i.glyphicon.glyphicon-chevron-left
+          = t(".back")
