@@ -1,0 +1,27 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV['DB_POOL'] || ENV['RAILS_MAX_THREADS'] || 5 %>
+
+development:
+  <<: *default
+  username: <%= ENV['DATABASE_USER'] || 'root' %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  database: rubik_development
+
+test: &test
+  <<: *default
+  username: <%= ENV['DATABASE_USER'] || 'root' %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  database: rubik_test
+
+<% if ENV['DATABASE_URL'] %>
+production:
+  <<: *default
+  url: <%= ENV.fetch('DATABASE_URL') %>
+<% end %>
+
+cucumber:
+  <<: *test
