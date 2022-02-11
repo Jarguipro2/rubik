@@ -1,0 +1,29 @@
+.terms-controller body
+  .navbar.navbar-inverse
+    box-shadow: none
+    margin-bottom: 0
+
+  .hero-jumbotron
+    margin-bottom: 15px
+    padding: 60px 0 60px 0
+    background-image: asset-url("ets-jumbotron.jpg")
+    background-size: cover
+    background-position: center center
+
+    @media (max-width: $screen-md-min)
+      padding: 30px 0 30px 0
+
+      h1
+        margin-bottom: 5px
+        font-size: 46px
+
+    @media (max-width: $screen-sm-min)
+      padding: 15px 0 15px 0
+
+      h1
+        margin-bottom: 0
+        font-size: 36px
+
+    *
+      color: white
+      text-shadow: black 3px 1px 1px
