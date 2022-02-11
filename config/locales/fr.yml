@@ -1,0 +1,176 @@
+fr:
+  activemodel:
+    attributes:
+      leave:
+        starts_at: Début
+        ends_at: Fin
+    errors:
+      models:
+        weekday_time_range:
+          attributes:
+            ends_at:
+              greater_than_or_equal_to_starts_at: Veuillez spécifier un temps de fin plus grand que le temps de début
+  activerecord:
+    attributes:
+      agenda:
+        courses: Cours
+        courses_per_schedule: Nombre de cours par horaire
+        filter_groups: Filtrer les groupes
+        leaves: Congés
+        mandatory_course_ids: Cours obligatoires
+        schedules_count: Nombre d'horaires générés
+      comment:
+        user_email: Courriel
+        body: Commentaire
+      newsletter_subscription:
+        email: Courriel
+    errors:
+      models:
+        agenda:
+          attributes:
+            courses:
+              blank: Veuillez sélectionner au moins un cours
+              greater_than_or_equal_to_courses_per_schedule: Veuillez sélectionner un nombre de cours supérieur ou égal au nombre de cours par horaire
+              mandatory_courses_less_than_or_equal_to_courses_per_schedule: Veuillez sélectionner un nombre de cours obligatoires égal ou inférieur au nombre de cours par horaire
+              mandatory_courses_redundant: Le nombre de cours obligatoires équivaut au nombre de cours par horaire; Votre sélection de cours non-obligatoire sera donc ignorée.
+            courses_per_schedule:
+              inclusion: Le nombre de cours par horaire "%{value}" est interdit
+            leaves:
+              invalid: Veuillez corriger les congés spécifiés
+        agenda/course:
+          attributes:
+            selected_groups:
+              blank: Veuillez sélectionner au moins un groupe par cours
+        newsletter_subscription:
+          attributes:
+            email:
+              taken: a déjà été enregistré
+  agendas:
+    course_selection:
+      filter_groups: Filtrer les groupes comme prochaine étape
+      mandatory_courses_explication_html: Sélectionnez le "<i class="fa fa-lock"></i>" à côté d'un cours pour le rendre obligatoire.
+      title: Choix de cours
+    group_selection:
+      back: Retour à la sélection des groupes
+      groups: Groupes
+      title: Choix de groupes
+  comments:
+    new:
+      notice: Vous avez un commentaire? Une suggestion? Êtes-vous tombé sur un bogue? Veuillez nous le partager via le formulaire ci-dessous!
+      title: Laisser un commentaire
+      text: "Plutôt que d'envoyer un commentaire pour un bogue ou une suggestion, considérez plutôt ouvrir un <a title=\"ticket\" href=\"https://github.com/Krystosterone/rubik/issues\" target=\"_blank\">ticket</a> ou d'implémenter la suggestion et ouvrir une <a title=\"Pull Request\" href=\"https://github.com/Krystosterone/rubik/pulls\" target=\"_blank\">Pull Request</a>."
+    create:
+      success: Votre commentaire a été envoyé avec succès!
+  comment_mailer:
+    email:
+      subject: '[Rubik-ETS] Nouveau commentaire'
+      from: 'De: %{email}'
+  errors:
+    show:
+      title: "Erreur %{code}"
+      message:
+        internal_server_error: Erreur interne
+        not_found: Page introuvable
+        unauthorized: Accès non autorisé
+        unprocessable_entity: Erreur d'entité
+  faqs:
+    show:
+      title: Foire aux questions
+      introduction: |
+        Bonjour,
+
+        je me nomme <a title="Github" href="https://github.com/Krystosterone" target="_blank">Krystian</a> et je suis le créateur de <b><a title="Rubik" href="https://github.com/Krystosterone/rubik" target="_blank">Rubik</a></b>: un outil facile, pratique et intuitif afin de générer des combinaisons d'horaires pour différents trimestres.
+
+        J'ai créé ce site comme projet de fin d'études au trimestre d'automne 2013 et le maintiens jusqu'à ce jour. Je vous prierais donc de garder cela en tête avant de m'écrire tout commentaire désobligeant ou me faire part de vos frustrations.
+
+        Je fournis ce service gratuitement, sans compensation et l'héberge à mes frais. Ce site n'a aucune affiliation avec l'ÉTS.
+      questions:
+        - title: Quand est-ce que les trimestres sont-ils mis à jour?
+          body: |
+            Le site dépend entièrement des données fournies via les PDFs produits ici: <a title="Horaires et planification des cours : baccalauréats" href="http://etsmtl.ca/horaires-bac" target="_blank">Horaires et planification des cours : baccalauréats</a>. Les trimestres sont donc mis à jour lorsque ces données sont rendues publiques.
+
+            Si les données fournies sur le site diffèrent de ceux affichées sur ChemiNot, il s'agit généralement d'une erreur de la part de l'école.
+
+            Avant d'envoyer un <a title="commentaire" href="/comments/new">commentaire</a>, veuillez vous assurer que votre choix de groupe-cours est bel et bien énuméré dans le PDF correspondant.
+  helpers:
+    submit:
+      create: Soumettre
+      update: Soumettre
+  layouts:
+    application:
+      title: Rubik
+      noscript_warning: Veuillez activer Javascript pour utiliser le site
+  newsletter_subscription_mailer:
+    update_available_email:
+      body:
+        one: |
+          Bonjour,
+
+          vous recevez ce courriel car vous vous êtes inscrit aux mises à jour du planificateur d'horaire Rubik.
+
+          Un nouveau trimestre a été rajouté:
+          %{trimesters}
+
+          Vous pouvez maintenant générer vos combinaisons d'horaires au: http://ets.rubik.co
+
+          Bonnes études!
+        other: |
+          Bonjour,
+
+          vous recevez ce courriel car vous vous êtes inscrit aux mises à jour du planificateur d'horaire Rubik.
+
+          Des nouveaux trimestres ont été rajoutés:
+          %{trimesters}
+
+          Vous pouvez maintenant générer vos combinaisons d'horaires au: http://ets.rubik.co
+
+          Bonnes études!
+      subject:
+        one: Nouveau Trimestre Disponible
+        other: Nouveaux Trimestres Disponibles
+  shared:
+    breadcrumb:
+      terms: Trimestres
+      agendas:
+        course_selection: Choix de cours
+        group_selection: Choix de groupes
+      schedules: Horaires
+    footer:
+      message_html: "&copy; Krystian Czesak | <a title=\"Github\" href=\"https://github.com/Krystosterone/rubik\" target=\"_blank\">Github</a>"
+      donate: Contribuer
+    navbar:
+      comments: Commentaires
+      faq: FAQ
+    overview:
+      academic_degree_name: Baccalauréat
+      course_groups: Groupes
+      courses_selected: Cours sélectionnés
+      term_title: Trimestre
+  schedule_leaves:
+    schedule_leave:
+      title: Congé
+  schedules:
+    index:
+      blank_agenda: Veuillez choisir une nouvelle combinaison de cours; aucune combinaison n'a pu être trouvée
+      edit: Éditer
+      title: Horaires
+    processing:
+      message: Combinaisons en cours…
+    schedule:
+      title: "Horaire - %{index}"
+    show:
+      back: Retour aux résultats
+  terms:
+    index:
+      title: Générateur d'horaires
+      subtitle: Faites votre choix de cours avec aisance
+      newsletter_subscription_message: Je veux être notifié à la prochaine mise à jour des trimestres
+    create_newsletter_subscription:
+      success: Vous serez notifié à la prochaine mise à jour des trimestres
+  views:
+    pagination:
+      first_html: "&laquo; Premier"
+      last_html: Dernier &raquo;
+      next_html: Suivant &rsaquo;
+      previous_html: "&lsaquo; Précédent"
+      truncate_html: "&hellip;"
