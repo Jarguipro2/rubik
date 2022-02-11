@@ -1,0 +1,17 @@
+!!!
+%html{ class: "#{controller_name}-controller #{action_name}-action" }
+  %head
+    %title= t(".title")
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" }
+
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "//use.fontawesome.com/2a654ac7ef.js"
+    = csrf_meta_tags
+  %body
+    %noscript
+      .well.text-center= t(".noscript_warning")
+    = render "shared/navbar" if @show_navigation
+    = yield
+    = render "shared/footer" if @show_navigation
+    = render "shared/google_analytics"
