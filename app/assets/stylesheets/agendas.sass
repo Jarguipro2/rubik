@@ -1,0 +1,85 @@
+.agendas-controller body
+  .course-checkbox-button
+    float: left
+    width: 134px
+    margin: 3px 0
+    padding: 0 2px
+
+    @media (max-width: $screen-md-min)
+      width: 144px
+
+    @media (max-width: 750px)
+      width: (100%/5)
+
+    @media (max-width: 700px)
+      width: (100%/4)
+
+    @media (max-width: 610px)
+      width: (100%/3)
+
+    @media (max-width: 450px)
+      width: (100%/2)
+
+    @media (max-width: 285px)
+      width: 100%
+
+    label
+      &:first-of-type
+        width: 100%
+
+      &:last-of-type
+        width: 40px
+
+    input[type="checkbox"]
+      display: none
+
+      + label .checked
+        display: none
+
+      &:checked + label
+        @extend .active
+
+        .checked
+          display: inline-block
+
+        .unchecked
+          display: none
+
+  .courses-per-schedule-group
+    input[type="radio"]
+      display: none
+
+      &:checked + label
+        @extend .active
+
+  fieldset
+    margin-bottom: 20px
+
+  .leave
+    margin-bottom: 15px
+
+  .group-selection-table
+    @extend .table
+    @extend .table-bordered
+    @extend .table-condensed
+    table-layout: fixed
+
+    > tbody > tr
+      > th
+        height: 100%
+
+      > th, > td
+        padding: 0
+
+        label
+          display: block
+          height: 100%
+          margin: 0
+          width: 100%
+
+          .label-content
+            padding: 5px
+
+  .back
+    padding-bottom: 6px
+    padding-top: 6px

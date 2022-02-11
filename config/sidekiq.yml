@@ -1,0 +1,5 @@
+---
+:concurrency: <%= ENV['SIDEKIQ_RAILS_MAX_THREADS'] || 25 %>
+:queues:
+  - default
+  - mailers
